@@ -21,8 +21,8 @@ export default class DiceRoller extends Component {
   render() {
     return (
       <div>
-          <p>Dice 1: {this.state.number}</p>
-          <button onClick={() => this.diceValue()}>Generate</button>
+          <p>{this.state.number}</p>
+          <button onClick={() => this.diceValue()}>Roll me!</button>
       </div>
     )
   }
