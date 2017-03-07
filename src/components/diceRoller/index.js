@@ -1,24 +1,28 @@
 import React, { Component } from 'react'
+import _ from 'lodash'
 
 export default class DiceRoller extends Component {
 
   constructor(){
     super()
-    this.state = { number: 0 }
+    this.state = { number: this.randomNumber() }
   }
 
   randomNumber(){
-    const diceSides = [1, 2, 3, 4, 5, 6]
-    const pickedSide = this.diceSides[Math.floor(Math.random() * 6)]
-    this.setState({number: this.pickedSide})
+    return _.random(1, 6)
+  }
+
+  diceValue(){
+    console.log(this.randomNumber())
+    this.setState({number: this.randomNumber()})
   }
 
 
   render() {
     return (
       <div>
-        <p>{this.state.number}</p>
-        <button onClick={() => this.setState({ number: this.randomNumber() })}>Generate</button>
+          <p>Dice 1: {this.state.number}</p>
+          <button onClick={() => this.diceValue()}>Generate</button>
       </div>
     )
   }

@@ -1,4 +1,4 @@
 import React from 'react'
 import DiceRoller from '../diceRoller'
 
-export default () => <DiceRoller />
+export default () => <div> <DiceRoller /> <DiceRoller /> <DiceRoller /> <DiceRoller /> <DiceRoller /></div>
