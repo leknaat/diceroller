@@ -17,16 +17,12 @@ export default class DiceRoller extends Component {
     this.setState({diceResult: this.randomNumber()})
   }
 
-  componentWillMount() {
-    const multiplier = [1, 2, 3, 4, 5]
-    this.setState({ multiply: this.props.multiplier[0] })
-  }
-
   multiplyBy() {
-    const currentIndex = this.props.multiplyer.indexOf(this.state.multiply)
+    const multiplier = [1, 2, 3, 4, 5]
+    const currentIndex = multiplier.indexOf(this.state.multiply)
     const addedIndex = currentIndex + 1
-    const index = addedIndex >= this.props.multiplier.length ? 0 : addedIndex
-    this.setState({ multiply: this.props.multiplier[index] })
+    const index = addedIndex >= multiplier.length ? 0 : addedIndex
+    this.setState({ multiply: multiplier[index] })
   }
 
 
@@ -34,9 +30,9 @@ export default class DiceRoller extends Component {
     return (
       <div>
           <button onClick={() => this.diceValue()}>Roll me!</button>
-          <button onClick={() => this.multiplyBy()}>Multiplier</button>
+          <p>Multiplier: {this.state.multiply}<button onClick={() => this.multiplyBy()}>Multiplier</button></p>
           <ul>
-            <li>{this.state.diceResult}</li>
+            <li>{this.state.diceResult * this.state.multiply}</li>
           </ul>
       </div>
     )
