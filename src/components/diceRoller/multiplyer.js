@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export class default Multiplyer extends Component {
+export default class Multiplyer extends Component {
 
   constructor(){
     super()
@@ -21,6 +21,11 @@ export class default Multiplyer extends Component {
 
 
   render(){
-
+    return (
+      <div>
+        <p>{this.state.number}</p>
+        <button onClick={() => this.nextNumber()}>Multiplyer</button>
+      </div>
+    )
   }
 }
