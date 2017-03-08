@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-import Multiplyer from './multiplyer.js'
 import _ from 'lodash'
 
 export default class DiceRoller extends Component {
 
   constructor(){
     super()
-    this.state = { number: this.randomNumber() }
+    this.state = { diceResult: this.randomNumber(), multiply: 1 }
   }
 
   randomNumber(){
@@ -15,16 +14,30 @@ export default class DiceRoller extends Component {
 
   diceValue(){
     console.log(this.randomNumber())
-    this.setState({number: this.randomNumber()})
+    this.setState({diceResult: this.randomNumber()})
+  }
+
+  componentWillMount() {
+    const multiplier = [1, 2, 3, 4, 5]
+    this.setState({ multiply: this.props.multiplier[0] })
+  }
+
+  multiplyBy() {
+    const currentIndex = this.props.multiplyer.indexOf(this.state.multiply)
+    const addedIndex = currentIndex + 1
+    const index = addedIndex >= this.props.multiplier.length ? 0 : addedIndex
+    this.setState({ multiply: this.props.multiplier[index] })
   }
 
 
   render() {
     return (
       <div>
-          <p>{this.state.number}</p>
           <button onClick={() => this.diceValue()}>Roll me!</button>
-          <Multiplyer />
+          <button onClick={() => this.multiplyBy()}>Multiplier</button>
+          <ul>
+            <li>{this.state.diceResult}</li>
+          </ul>
       </div>
     )
   }
