@@ -14,7 +14,7 @@ export default class DiceRoller extends Component {
 
   diceValue(){
     console.log(this.randomNumber(this.props.sides))
-    this.setState({diceResult: this.randomNumber(this.props.sides)})
+    this.setState({diceResult: this.randomNumber(this.props.sides) * this.state.multiply})
   }
 
   multiplyBy() {
@@ -32,7 +32,7 @@ export default class DiceRoller extends Component {
           <button onClick={() => this.diceValue()}>Roll me!</button>
           <p>Multiplier: {this.state.multiply}<button onClick={() => this.multiplyBy()}>Multiplier</button></p>
           <ul>
-            <li>{this.state.diceResult * this.state.multiply}</li>
+            <li>{this.state.diceResult}</li>
           </ul>
       </div>
     )
