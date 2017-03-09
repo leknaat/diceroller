@@ -5,16 +5,16 @@ export default class DiceRoller extends Component {
 
   constructor(){
     super()
-    this.state = { diceResult: this.randomNumber(), multiply: 1 }
+    this.state = { diceResult: null, multiply: 1 }
   }
 
-  randomNumber(){
-    return _.random(1, 6)
+  randomNumber(sides) {
+    return _.random(1, sides)
   }
 
   diceValue(){
-    console.log(this.randomNumber())
-    this.setState({diceResult: this.randomNumber()})
+    console.log(this.randomNumber(this.props.sides))
+    this.setState({diceResult: this.randomNumber(this.props.sides)})
   }
 
   multiplyBy() {
