@@ -5,7 +5,7 @@ export default class DiceRoller extends Component {
 
   constructor(){
     super()
-    this.state = { diceResult: null, multiply: 1 }
+    this.state = { diceResults: [], modifier: 1 }
   }
 
   randomNumber(sides) {
@@ -13,26 +13,31 @@ export default class DiceRoller extends Component {
   }
 
   diceValue(){
-    console.log(this.randomNumber(this.props.sides))
-    this.setState({diceResult: this.randomNumber(this.props.sides) * this.state.multiply})
+    this.setState({diceResults: [...this.state.diceResults, (this.randomNumber(this.props.sides)) + this.state.modifier]})
   }
 
-  multiplyBy() {
-    const multiplier = [1, 2, 3, 4, 5]
-    const currentIndex = multiplier.indexOf(this.state.multiply)
+  rolls() {
+    return _.map(this.state.diceResults, (results) => {
+      return (<li>{results}</li>)
+    })
+  }
+
+  modifyBy() {
+    const modifier = [1, 2, 3, 4, 5]
+    const currentIndex = modifier.indexOf(this.state.modifier)
     const addedIndex = currentIndex + 1
-    const index = addedIndex >= multiplier.length ? 0 : addedIndex
-    this.setState({ multiply: multiplier[index] })
+    const index = addedIndex >= modifier.length ? 0 : addedIndex
+    this.setState({ modifier: modifier[index] })
   }
 
 
   render() {
     return (
       <div>
-          <button onClick={() => this.diceValue()}>Roll me!</button>
-          <p>Multiplier: {this.state.multiply}<button onClick={() => this.multiplyBy()}>Multiplier</button></p>
+          <button onClick={() => this.diceValue()}>Roll a d{this.props.sides}</button>
+          <p>Modifier: {this.state.modifier}<button onClick={() => this.modifyBy()}>Modifier</button></p>
           <ul>
-            <li>{this.state.diceResult}</li>
+            {this.rolls()}
           </ul>
       </div>
     )
